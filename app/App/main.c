@@ -18,22 +18,27 @@ int main(){
 	//configurePin(GPIO_MODE_OUTPUT,PIN_5,PORTC);
 	//configurePin(GPIO_MODE_OUTPUT,PIN_13,PORTB);
 	configureIntPin(GPIO_MODE_INPUT,PIN_0,PORTA);
+	int realSignal;
+	int inputSignal;
 
-	int inputSignal = PORTA->IDR;
-	int HIGH = (int*)0x00000000;
-	while(1){
-
-
-if(  PORTA->IDR ){
-	writeOutHigh(PORTG,14);
-}else{
-	writeOutLow(PORTG,14);
-
+while(1){
+   realSignal = PORTA->IDR;
+   inputSignal = filterSignal(PORTA->IDR);
+   if( inputSignal != 1 ){
+	//writeOutHigh(PORTG,14);
+	writeSet(PORTG,14);
+	writeReset(PORTG,13);
+	//writeOutLow(PORTG,13);
+   }else{
+	//writeOutHigh(PORTG,13);
+	//writeOutLow(PORTG,14);
+	writeSet(PORTG,13);
+	writeReset(PORTG,14);
+   }
 }
 
 
 
-aaaaaaaaaaaaaaaaaa}
 
 /*
 	delay(100000);

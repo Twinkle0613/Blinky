@@ -31,6 +31,13 @@ void gpioUnresetEnableClock(GPIO *port){
     rc->AHB1ENR  |= 1 << GPIOC_BIT;     // '1' that mean enable reset
 	break;
 
+	case GPIOA_BASE_ADDRESS:
+    rc->AHB1RSTR  &= ~( 1 << GPIOA_BIT );         //build mask first
+    rc->AHB1RSTR |= 0 << GPIOA_BIT ;    // '0' that mean unable reset
+    rc->AHB1ENR &= ~( 1 << GPIOA_BIT);
+    rc->AHB1ENR  |= 1 << GPIOA_BIT;     // '1' that mean enable reset
+	break;
+
 	default:break;
 
 	}
